@@ -50,6 +50,11 @@ The system utilizes a Collection-per-Tenant strategy within a shared MongoDB clu
 Master Data: Stored in a master_metadata collection. Holds organization names, admin credentials (hashed), and pointers to tenant collections.
 Tenant Data: Upon organization creation, the system dynamically provisions a dedicated collection (e.g., org_spacex, org_tesla).
 Benefit: This approach ensures logical data isolation and simplifies per-tenant backup/restore operations without the operational overhead of managing separate database instances for every client.
+The application follows a Service-Repository pattern to separate concerns, satisfying the "Class-based design" requirement:
+routers/: Handles HTTP requests and response codes.
+services/: Contains business logic (e.g., uniqueness checks, collection creation).
+core/: Manages configuration, database connections, and security utilities.
+models/: Defines data structures (Pydantic schemas).
 <img width="1862" height="887" alt="image" src="https://github.com/user-attachments/assets/56acbc5b-c9d9-4941-a69b-11f930a8652e" />
 <img width="1853" height="883" alt="image" src="https://github.com/user-attachments/assets/8bd6342a-c1a5-46d1-a6eb-f41d96d7846a" />
 <img width="1844" height="894" alt="image" src="https://github.com/user-attachments/assets/3c4bb784-d343-4eb0-b9ec-9a7d9f8307ca" />
